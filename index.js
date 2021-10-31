@@ -28,6 +28,7 @@ async function run() {
       const tourPackages = client.db("tourpackages");
       const serviceCollection = tourPackages.collection("services");
       const orderCollection = tourPackages.collection("orders");
+      const flightCollection = tourPackages.collection('flights')
 
  //Get all the services
       app.get ('/services', async (req,res) => {
@@ -44,6 +45,15 @@ async function run() {
           console.log ('getting the data from server')
 
       }),
+      
+      app.get ('/flights', async (req,res) => {
+          const coursor = flightCollection.find({})
+          const query = await coursor.toArray();
+          res.send(query)
+          console.log ('getting the data from server')
+
+      }),
+
 
       //Get a single data
       app.get ('/services/:id', async (req,res) => {
